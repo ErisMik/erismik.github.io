@@ -1,10 +1,31 @@
 .wrapper {
-	border-left: solid black 1px;
-	border-top: solid black 1px;
-
-	padding-left: 5px;
-	padding-top: 5px;
+	padding: 5px;
 	padding-bottom: 15px;
 
-	margin-bottom: 15px;
+	display: inline-block;
+	width: 30%;
+}
+
+.wrapper table, th, td {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	border-collapse: collapse;
+}
+
+.wrapper table {
+	border: 1px solid black;
+	text-align: left;
+}
+
+.wrapper th, td {
+    padding: 5px;
+}
+
+.main {
+	width: 100%;
+	text-align: center;
+}
+
+header {
+	text-align: center;
 }
