@@ -7,8 +7,8 @@ $.getJSON("https://api.github.com/users/erismik/repos", function(data) {
             "<td><a href=\""+val.html_url+"\">"+val.name+"</a></td>"+
             "<td>"+val.description+"</td>"+
             "<td>"+val.language+"</td>"+
-            "<td>"+val.updated_at+"</td>"+
-            "<td>"+val.created_at+"</td>"+
+            "<td>"+cleanTime(val.updated_at)+"</td>"+
+            "<td>"+cleanTime(val.created_at)+"</td>"+
             "</tr>"
         );
     });
@@ -26,14 +26,20 @@ $.getJSON("https://api.bitbucket.org/2.0/repositories/itsEris", {origin: "http:/
             "<td><a href=\""+val.links.html.href+"\">"+val.name+"</a></td>"+
             "<td>"+val.description+"</td>"+
             "<td>"+val.language+"</td>"+
-            "<td>"+val.updated_on+"</td>"+
-            "<td>"+val.created_on+"</td>"+
+            "<td>"+cleanTime(val.updated_on)+"</td>"+
+            "<td>"+cleanTime(val.created_on)+"</td>"+
             "</tr>"
         );
     });
 
     $("#current table").append(items.join(""));
 });
+
+function cleanTime(ind) {
+	var d = new Date(ind);
+	var output = (d.getMonth()+1) + "/" + d.getFullYear();
+	return output;
+}
 
 // Sort function for the table (Copied from W3 schools)
 function sortTable(n) {
