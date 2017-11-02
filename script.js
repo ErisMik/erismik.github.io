@@ -37,12 +37,12 @@ $.getJSON("https://api.bitbucket.org/2.0/repositories/itsEris", {origin: "http:/
 
 function cleanTime(ind) {
 	var d = new Date(ind);
-	var output = (d.getMonth()+1) + "/" + d.getFullYear();
+	var output = (d.getMonth()+1).toString().padStart(2, '0') + "/" + d.getFullYear();
 	return output;
 }
 
-// Sort function for the table (Copied from W3 schools)
-function sortTable(n) {
+// Sort function for the table (Copied from W3 schools, slightly modified for my own use)
+function sortTable(n, isDate=false) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("current");
   switching = true;
@@ -66,17 +66,39 @@ function sortTable(n) {
       /*check if the two rows should switch place,
       based on the direction, asc or desc:*/
       if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
+        if (isDate) {
+          if (x.innerHTML.slice(-4) > y.innerHTML.slice(-4)) {
+            shouldSwitch = true;
+            break;
+          } else if (x.innerHTML.slice(-4) === y.innerHTML.slice(-4)){
+            if (x.innerHTML.slice(2) > y.innerHTML.slice(2)) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        else if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
           shouldSwitch= true;
           break;
         }
+
       } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
+        if (isDate) {
+          if (x.innerHTML.slice(-4) < y.innerHTML.slice(-4)) {
+            shouldSwitch = true;
+            break;
+          } else if (x.innerHTML.slice(-4) === y.innerHTML.slice(-4)){
+            if (x.innerHTML.slice(2) < y.innerHTML.slice(2)) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        else if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
           shouldSwitch= true;
           break;
         }
+
       }
     }
     if (shouldSwitch) {
