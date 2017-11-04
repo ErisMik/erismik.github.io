@@ -1,3 +1,21 @@
+body {
+	color: #586e75;
+	background-color: #fdf6e3;
+}
+
+header {
+	text-align: center;
+	color: #073642;
+}
+
+a {
+	color: #268bd2;
+}
+
+a:hover {
+	color: #d33682
+}
+
 .wrapper {
 	padding: 5px;
 	padding-bottom: 15px;
@@ -6,13 +24,13 @@
 }
 
 .wrapper table, th, td {
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
+	border-top: 1px solid #657b83;
+	border-bottom: 1px solid #657b83;
 	border-collapse: collapse;
 }
 
 .wrapper table {
-	border: 1px solid black;
+	border: 1px solid #657b83;
 	text-align: left;
 }
 
@@ -20,11 +38,15 @@
     padding: 5px;
 }
 
-.main {
-	width: 100%;
-	text-align: center;
+.wrapper td {
+	color: #657b83;
 }
 
-header {
+.wrapper th:hover {
+	color: #d33682;
+}
+
+.main {
+	width: 100%;
 	text-align: center;
 }
