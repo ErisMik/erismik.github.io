@@ -35,6 +35,7 @@ $.getJSON("https://api.bitbucket.org/2.0/repositories/itsEris", {origin: "http:/
     $("#current table").append(items.join(""));
 });
 
+// Cleans up the time to be human readable
 function cleanTime(ind) {
 	var d = new Date(ind);
 	var output = (d.getMonth()+1).toString().padStart(2, '0') + "/" + d.getFullYear();
