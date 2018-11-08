@@ -36,6 +36,7 @@ a:hover {
 
 .wrapper th, td {
     padding: 5px;
+    padding-right: 15px;
 }
 
 .wrapper td {
@@ -44,6 +45,10 @@ a:hover {
 
 .wrapper th:hover {
 	color: #d33682;
+}
+
+.wrapper svg {
+	margin-right: 15px;
 }
 
 .main {
