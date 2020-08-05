@@ -6,8 +6,9 @@
 	<head>
 		<title>Stuff Eric's Made</title>
 		<meta charset="utf-8"/>
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" href="style.css">
-		<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript" src="script.js"></script>
 	</head>
 	<body>
@@ -16,21 +17,28 @@
 		</header>
 
 		<div class="main">
+		<h2 hidden="true">Main</h2>
+
 		<div class="wrapper" id="current">
+
 			<h3>About Me</h3>
-			<p>🎓 Computer Engineering Student at UBC</p>
+			<p>🎓 Computer Engineer</p>
 			<P>💻 Passionate about all aspects of Computer Science</P>
 			<p>🐧 Working with Embedded Linux Software</p>
 
 			<h3>My Project Repos</h3>
 			<table>
-				<th onclick=sortTable(0)>Name</th><th onclick=sortTable(1)>Description</th><th onclick=sortTable(2)>Language</th><th onclick="sortTable(3, true)">Last Updated</th><th onclick="sortTable(4, true)">Created</th>
+				<thead>
+				<th onclick="sortTable('name')">Name</th><th onclick="sortTable('description')">Description</th><th onclick="sortTable('language')">Language</th><th onclick="sortTable('updated')">Last Updated</th><th onclick="sortTable('created')">Created</th>
+				</thead>
+				<tbody id="projectTableBody"></tbody>
 			</table>
 		</div>
 
 		<footer class="link-wrapper">
 			<h3>Find me and more projects here:</h3>
 			<div><a href="https://github.com/ErisMik">Github</a></div>
+			<div><a href="https://gitlab.com/ErisMik">Gitlab</a></div>
 			<div><a href="https://bitbucket.org/itsEris/">BitBucket</a></div>
 			<div><a href="https://devpost.com/ericm99">DevPost</a></div>
 			<div><a href="https://www.linkedin.com/in/eric-m-36a15486/">LinkedIn</a></div>
@@ -39,5 +47,6 @@
 			<!-- <div><a href="http://motherfuckingwebsite.com/">Website Design Philosophy</a></div> -->
 			<div><a href="http://ethanschoonover.com/solarized">Colourscheme</div>
 		</footer>
+		</div>
 	</body>
 </html>
