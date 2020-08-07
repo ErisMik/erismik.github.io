@@ -9,7 +9,19 @@ function cleanTime (ind) {
   return output
 }
 
+// Cleans up the language to be pretty
+function cleanLang (lang) {
+  return lang ? capitalize(lang) : 'Not Avail.'
+}
+
+// Ensures the first letter of a word is capital case
+function capitalize (word) {
+  return word.charAt(0).toUpperCase() + word.slice(1)
+}
+
 var tableData = []
+var sortTableAsc = false
+var sortTablePrevKey = ''
 
 // Make the github AJAX call for my Repos
 fetch('https://api.github.com/users/erismik/repos').then(response => response.json()).then(data => {
@@ -18,7 +30,7 @@ fetch('https://api.github.com/users/erismik/repos').then(response => response.js
     href: item.html_url,
     name: item.name,
     description: item.description,
-    language: item.language,
+    language: cleanLang(item.language),
     updated: cleanTime(item.updated_at),
     created: cleanTime(item.created_at)
   }))
@@ -32,7 +44,7 @@ fetch('https://api.bitbucket.org/2.0/repositories/itsEris').then(response => res
     href: item.links.html.href,
     name: item.name,
     description: item.description,
-    language: item.language,
+    language: cleanLang(item.language),
     updated: cleanTime(item.updated_on),
     created: cleanTime(item.created_on)
   }))
@@ -46,7 +58,7 @@ fetch('https://gitlab.com/api/v4/users/erismik/projects').then(response => respo
     href: item.web_url,
     name: item.name,
     description: item.description,
-    language: 'Not Avail.',
+    language: cleanLang(null),
     updated: cleanTime(item.last_activity_at),
     created: cleanTime(item.created_at)
   }))
@@ -88,13 +100,40 @@ function mergeSort (unsortedArray, comparator) {
   )
 }
 
-function genericComparator (left, right, key) {
-  return left[key] < right[key]
+function comparatorTime (left, right) {
+  var leftSplit = left.split('/').map(str => parseInt(str))
+  var rightSplit = right.split('/').map(str => parseInt(str))
+  if (leftSplit[1] === rightSplit[1]) {
+    return leftSplit[0] > rightSplit[0]
+  } else {
+    return leftSplit[1] > rightSplit[1]
+  }
+}
+
+function comparator (left, right, key, asc) {
+  const compare = () => {
+    switch (key) {
+      case 'name':
+      case 'description':
+      case 'language':
+        return left[key].toLowerCase() < right[key].toLowerCase()
+      case 'created':
+      case 'updated':
+        return comparatorTime(left[key], right[key])
+      default:
+        return left[key] < right[key]
+    }
+  }
+
+  return asc ? !compare() : compare()
 }
 
 // Sort entire table by
 function sortTable (key) {
-  const sortedArray = mergeSort(tableData, (left, right) => genericComparator(left, right, key))
+  sortTableAsc = (sortTablePrevKey === key) ? !sortTableAsc : false
+  sortTablePrevKey = key
+
+  const sortedArray = mergeSort(tableData, (left, right) => comparator(left, right, key, sortTableAsc))
   const items = sortedArray.map(item =>
     '<tr>' +
             '<td>' + item.icon + '<a href="' + item.href + '">' + item.name + '</a></td>' +
