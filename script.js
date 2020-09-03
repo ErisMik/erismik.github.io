@@ -34,7 +34,7 @@ fetch('https://api.github.com/users/erismik/repos').then(response => response.js
     updated: cleanTime(item.updated_at),
     created: cleanTime(item.created_at)
   }))
-  sortTable('name')
+  sortTable('updated')
 })
 
 // Make the bitbucket AJAX call for my Repos
@@ -48,7 +48,7 @@ fetch('https://api.bitbucket.org/2.0/repositories/itsEris').then(response => res
     updated: cleanTime(item.updated_on),
     created: cleanTime(item.created_on)
   }))
-  sortTable('name')
+  sortTable('updated')
 })
 
 // Make the gitlab AJAX call for my repos
@@ -62,7 +62,7 @@ fetch('https://gitlab.com/api/v4/users/erismik/projects').then(response => respo
     updated: cleanTime(item.last_activity_at),
     created: cleanTime(item.created_at)
   }))
-  sortTable('name')
+  sortTable('updated')
 })
 
 // Mergesort merge function
